@@ -12,7 +12,6 @@
     "test": "cross-env NODE_ENV=test jest --detectOpenHandles test",
     "test:watch": "cross-env NODE_ENV=test nodemon -e js,graphql -x jest --detectOpenHandles test",
     "coverage": "cross-env NODE_ENV=test jest --collectCoverageFrom=src/**.js --coverage test"
-
   },
   "repository": {
     "type": "git",
@@ -29,11 +28,14 @@
     "bcryptjs": "^2.4.3",
     "dataloader-sequelize": "^1.7.9",
     "dotenv": "^6.2.0",
+    "graphql-sequelize": "^9.3.4",
     "graphql-shield": "^5.3.0",
     "graphql-yoga": "^1.17.4",
     "jsonwebtoken": "^8.5.0",
     "lodash": "^4.17.11",
     "merge-graphql-schemas": "^1.5.8",
+    "pg": "^7.8.1",
+    "pg-hstore": "^2.3.2",
     "sequelize": "^4.42.0",
     "uuid": "^3.3.2"
   },
@@ -47,6 +49,7 @@
     "eslint-plugin-prettier": "^3.0.1",
     "graphql-cli": "^3.0.11",
     "jest": "^24.1.0",
+    "nodemon": "^1.18.10",
     "prettier": "^1.16.4",
     "sequelize-cli": "^5.4.0"
   }
