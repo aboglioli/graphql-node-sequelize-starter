@@ -1,6 +1,10 @@
 const Sequelize = require('sequelize');
 
 class Contact extends Sequelize.Model {
+  static init(sequelize) {
+    return super.init(schema, { sequelize });
+  }
+
   static associate(models) {
     Contact.GeoPoint = Contact.belongsTo(models.GeoPoint, {
       foreignKey: 'geopointId',
@@ -37,7 +41,4 @@ const schema = {
   },
 };
 
-module.exports = sequelize => {
-  Contact.init(schema, { sequelize });
-  return Contact;
-};
+module.exports = Contact;

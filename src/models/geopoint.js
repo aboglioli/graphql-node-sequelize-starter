@@ -1,7 +1,9 @@
 const Sequelize = require('sequelize');
 
 class GeoPoint extends Sequelize.Model {
-
+  static init(sequelize) {
+    return super.init(schema, { sequelize });
+  }
 }
 
 const schema = {
@@ -22,7 +24,4 @@ const schema = {
   },
 };
 
-module.exports = sequelize => {
-  GeoPoint.init(schema, { sequelize });
-  return GeoPoint;
-};
+module.exports = GeoPoint;

@@ -1,6 +1,10 @@
 const Sequelize = require('sequelize');
 
 class User extends Sequelize.Model {
+  static init(sequelize) {
+    return super.init(schema, { sequelize });
+  }
+
   static associate(models) {
     User.Contact = User.belongsTo(models.Contact, {
       foreignKey: 'contactId',
@@ -53,7 +57,4 @@ const schema = {
   },
 };
 
-module.exports = sequelize => {
-  User.init(schema, { sequelize });
-  return User;
-};
+module.exports = User;
