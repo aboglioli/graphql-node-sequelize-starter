@@ -1,4 +1,11 @@
+require('dotenv').config();
 const { GraphQLClient, request } = require('graphql-request');
+
+// Mock modules
+const config = require('../src/config');
+if (config.redis.mock) {
+  jest.mock('../src/redis', () => require('redis-mock').createClient());
+}
 
 const startServer = require('../src/server');
 const {

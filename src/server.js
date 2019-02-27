@@ -1,5 +1,3 @@
-require('dotenv').config();
-
 const { GraphQLServer } = require('graphql-yoga');
 const cors = require('cors');
 

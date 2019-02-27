@@ -1,5 +1,6 @@
-const startServer = require('./server');
+require('dotenv').config();
 
+const startServer = require('./server');
 const models = require('./models');
 
 (async () => {
