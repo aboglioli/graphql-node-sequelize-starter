@@ -105,4 +105,10 @@ module.exports = {
       return models.User.findOne({ where: { id: user.id } });
     },
   },
+  User: {
+    contact: resolver(models.User.Contact),
+  },
+  Contact: {
+    geopoint: resolver(models.Contact.GeoPoint),
+  },
 };

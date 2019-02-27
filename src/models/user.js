@@ -6,7 +6,7 @@ class User extends Sequelize.Model {
   }
 
   static associate(models) {
-    User.Contact = User.belongsTo(models.Contact, {
+    this.Contact = this.belongsTo(models.Contact, {
       foreignKey: 'contactId',
       as: 'contact',
     });

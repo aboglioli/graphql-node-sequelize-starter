@@ -6,7 +6,7 @@ class Contact extends Sequelize.Model {
   }
 
   static associate(models) {
-    Contact.GeoPoint = Contact.belongsTo(models.GeoPoint, {
+    this.GeoPoint = this.belongsTo(models.GeoPoint, {
       foreignKey: 'geopointId',
       as: 'geopoint',
     });

@@ -10,10 +10,4 @@ const models = require('./models');
   });
 
   await models.sequelize.sync();
-
-  const user = await models.User.findOne({
-    where: { username: 'user' },
-  });
-  console.log(user.createContact);
-  console.log(user.getFull());
 })();
