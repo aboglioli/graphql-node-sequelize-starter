@@ -2,10 +2,10 @@ const bcrypt = require('bcryptjs');
 const jwt = require('jsonwebtoken');
 const { resolver } = require('graphql-sequelize');
 
-const models = require('../models');
-const config = require('../config');
-const redis = require('../redis');
-const { generateValidationCode } = require('../utils/user');
+const models = require('../../models');
+const config = require('../../config');
+const redis = require('../../redis');
+const { generateValidationCode } = require('../../utils/user');
 
 module.exports = {
   Query: {

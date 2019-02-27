@@ -10,7 +10,7 @@ if (config.redis.mock) {
 const startServer = require('../src/server');
 const {
   Mutation: { login },
-} = require('../src/resolvers/user.resolvers');
+} = require('../src/modules/user/resolvers');
 
 class Server {
   async start() {

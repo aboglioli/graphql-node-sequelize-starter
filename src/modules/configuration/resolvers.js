@@ -1,4 +1,4 @@
-const Configuration = require('../utils/configuration');
+const Configuration = require('../../utils/configuration');
 
 module.exports = {
   Query: {

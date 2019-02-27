@@ -18,14 +18,6 @@ input UserCreateInput {
   contact: ContactInput
 }
 
-input UserCreateInput {
-  username: String!
-  password: String!
-  name: String!
-  email: String!
-  contact: ContactInput
-}
-
 input UserUpdateInput {
   username: String!
   password: String!
@@ -34,15 +26,15 @@ input UserUpdateInput {
   contact: ContactInput
 }
 
-type User {
-  id: ID!
-  username: String!
-  name: String!
-  email: String!
-  contact: Contact
-  createdAt: Date!
-  updatedAt: Date!
-}
+# type User {
+#   id: ID!
+#   username: String!
+#   name: String!
+#   email: String!
+#   contact: Contact
+#   createdAt: Date!
+#   updatedAt: Date!
+# }
 
 type AuthPayload {
   user: User!

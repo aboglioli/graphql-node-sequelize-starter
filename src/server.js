@@ -1,15 +1,14 @@
 const { GraphQLServer } = require('graphql-yoga');
 const cors = require('cors');
 
+const schema = require('./modules');
 const models = require('./models');
-const resolvers = require('./resolvers');
 const redis = require('./redis');
-const makeContext = require('./context');
+const context = require('./context');
 
 const server = new GraphQLServer({
-  typeDefs: './src/typeDefs/index.graphql',
-  resolvers,
-  context: makeContext,
+  schema,
+  context,
 });
 
 // cors
