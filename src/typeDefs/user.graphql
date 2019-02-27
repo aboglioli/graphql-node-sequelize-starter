@@ -7,7 +7,7 @@ input ContactInput {
   phone: String
   address: String
   email: String
-  gepoint: GeoPointInput
+  geopoint: GeoPointInput
 }
 
 input UserCreateInput {
