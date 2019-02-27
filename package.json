@@ -1,14 +1,14 @@
 {
   "name": "graphql-node-sequelize-starter",
-  "version": "1.0.0",
-  "description": "Base project for GraphQL Yoga + Sequelize ORM + GraphQL Shield",
+  "version": "0.1",
+  "description": "Base project using GraphQL Yoga + Sequelize ORM (Postgres) + GraphQL Shield",
   "main": "index.js",
   "scripts": {
     "start": "cross-env NODE_ENV=production node src/index.js",
     "dev": "cross-env NODE_ENV=development nodemon -e js,graphql -x node src/index.js",
     "debug": "cross-env NODE_ENV=development nodemon -e js,graphql -x node --inspect src/index.js",
     "playground": "graphql playground",
-    "lint": "eslint --fix src/ test/",
+    "lint": "eslint --fix src/ migrations/ seeders/",
     "test": "cross-env NODE_ENV=test jest --detectOpenHandles test",
     "test:watch": "cross-env NODE_ENV=test nodemon -e js,graphql -x jest --detectOpenHandles test",
     "coverage": "cross-env NODE_ENV=test jest --collectCoverageFrom=src/**.js --coverage test"
@@ -28,6 +28,7 @@
     "bcryptjs": "^2.4.3",
     "dataloader-sequelize": "^1.7.9",
     "dotenv": "^6.2.0",
+    "graphql-relay": "^0.6.0",
     "graphql-sequelize": "^9.3.4",
     "graphql-shield": "^5.3.0",
     "graphql-yoga": "^1.17.4",
@@ -36,6 +37,7 @@
     "merge-graphql-schemas": "^1.5.8",
     "pg": "^7.8.1",
     "pg-hstore": "^2.3.2",
+    "redis": "^2.8.0",
     "sequelize": "^4.42.0",
     "uuid": "^3.3.2"
   },
@@ -51,6 +53,7 @@
     "jest": "^24.1.0",
     "nodemon": "^1.18.10",
     "prettier": "^1.16.4",
+    "redis-mock": "^0.43.0",
     "sequelize-cli": "^5.4.0"
   }
 }

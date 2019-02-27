@@ -41,8 +41,10 @@
     "prettier"
   ],
   "globals": {
-    "localStorage": false,
-    "Promise": false,
-    "google": false
+    "require": false,
+    "module": false,
+    "process": false,
+    "__filename": false,
+    "__dirname": false,
   }
 }

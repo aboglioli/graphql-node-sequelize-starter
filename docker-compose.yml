@@ -5,7 +5,7 @@ services:
     image: postgres:latest
     restart: always
     ports:
-      - "${DB_PORT}:5432"
+      - "${DB_PORT:-5432}:5432"
     environment:
       POSTGRES_USER: ${DB_USER:-postgres}
       POSTGRES_PASSWORD: ${DB_PASSWORD:-passwd}
@@ -19,7 +19,7 @@ services:
     image: redis
     restart: always
     ports:
-      - "${REDIS_PORT}:6379"
+      - "${REDIS_PORT:-6379}:6379"
 
   pgadmin:
     image: dpage/pgadmin4:latest
@@ -28,7 +28,7 @@ services:
       - "${PGADMIN_PORT:-8080}:80"
     environment:
       PGADMIN_DEFAULT_EMAIL: ${DB_DEFAULT_EMAIL:-pgadmin4@pgadmin.org}
-      PGADMIN_DEFAULT_PASSWORD: ${DB_DEFAULT_PASSWORD:-passwd}
+      PGADMIN_DEFAULT_PASSWORD: ${DB_PASSWORD:-passwd}
     volumes:
       - pgadmin:/root/.pgadmin
     networks:
