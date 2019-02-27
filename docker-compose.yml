@@ -14,13 +14,7 @@ services:
     volumes:
       - postgres:/data/postgres
     networks:
-      - main
-
-  redis:
-    image: redis
-    restart: always
-    ports:
-      - "${REDIS_PORT:-6379}:6379"
+      - database
 
   pgadmin:
     image: dpage/pgadmin4:latest
@@ -33,10 +27,19 @@ services:
     volumes:
       - pgadmin:/root/.pgadmin
     networks:
-      - main
+      - database
+    depends_on:
+      - postgres
+
+
+  redis:
+    image: redis
+    restart: always
+    ports:
+      - "${REDIS_PORT:-6379}:6379"
 
 networks:
-  main:
+  database:
     driver: bridge
 
 volumes:
