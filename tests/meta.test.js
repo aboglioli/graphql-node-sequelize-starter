@@ -1,13 +1,12 @@
-const { request } = require('graphql-request');
-
-const { server, seed, login, makeClient } = require('./helpers');
+const { Server, seed } = require('./helpers');
 const pkg = require('../package.json');
 
 describe('Meta', () => {
-  let host, client;
+  let server;
 
   beforeAll(async () => {
-    host = await server.start();
+    server = new Server();
+    await server.start();
   });
 
   afterAll(() => {
@@ -17,13 +16,11 @@ describe('Meta', () => {
   beforeEach(async () => {
     await seed.reset();
     await seed.admin();
-    const { token } = await login('admin', '123456');
-    client = makeClient(host, token);
+    await server.login('admin', '123456');
   });
 
   test('Retrieve information', async () => {
-    const { meta } = await request(
-      host,
+    const { meta } = await server.request(
       `
       {
         meta {

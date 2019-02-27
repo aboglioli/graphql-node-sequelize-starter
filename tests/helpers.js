@@ -1,30 +1,56 @@
-const { GraphQLClient } = require('graphql-request');
+const { GraphQLClient, request } = require('graphql-request');
 
 const startServer = require('../src/server');
 const {
   Mutation: { login },
 } = require('../src/resolvers/user.resolvers');
 
-let app;
+class Server {
+  async start() {
+    this.app = await startServer();
+    const { port } = this.app.address();
+    this.host = `http://localhost:${port}`;
 
-module.exports = {
-  server: {
-    start: async () => {
-      app = await startServer();
-      const { port } = app.address();
+    return this.host;
+  }
 
-      return `http://localhost:${port}`;
-    },
-    stop: () => app && app.close(),
-  },
-  redis: require('../src/redis'),
-  seed: require('./seed'),
-  login: (username, password) => login(null, { username, password }),
-  getError: errors => errors && errors[0] && errors[0].message,
-  makeClient: (host, token) =>
-    new GraphQLClient(host, {
+  stop() {
+    if (this.app) {
+      this.app.close();
+      return true;
+    }
+    return false;
+  }
+
+  async login(username, password) {
+    if (!this.host) {
+      throw new Error('Server not initialized');
+    }
+
+    const { token } = await login(null, { username, password });
+
+    this.client = new GraphQLClient(this.host, {
       headers: {
         Authorization: `Bearer ${token}`,
       },
-    }),
+    });
+
+    return token;
+  }
+
+  request(graphql, variables) {
+    if (!this.host) {
+      throw new Error('Server not initialized');
+    }
+
+    return variables
+      ? request(this.host, graphql, variables)
+      : request(this.host, graphql);
+  }
+}
+
+module.exports = {
+  Server,
+  seed: require('./seed'),
+  getError: errors => errors && errors[0] && errors[0].message,
 };

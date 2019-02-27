@@ -1,15 +1,14 @@
-const { request } = require('graphql-request');
-
-const { server, seed, login, makeClient, getError } = require('./helpers');
+const { Server, seed, getError } = require('./helpers');
 const models = require('../src/models');
 const redis = require('../src/redis');
 const { generateValidationCode } = require('../src/utils/user');
 
 describe('User', () => {
-  let host, client;
+  let server;
 
   beforeAll(async () => {
-    host = await server.start();
+    server = new Server();
+    await server.start();
   });
 
   afterAll(() => {
@@ -21,8 +20,7 @@ describe('User', () => {
     await seed.admin();
     await seed.user(2, { validated: true });
     await seed.user(1, { active: false, validated: true });
-    const { token } = await login('admin', '123456');
-    client = makeClient(host, token);
+    await server.login('admin', '123456');
   });
 
   test('Users exists in DB', async () => {
@@ -31,7 +29,7 @@ describe('User', () => {
   });
 
   test('Query "users" as admin', async () => {
-    const { users: allUsers } = await client.request(
+    const { users: allUsers } = await server.client.request(
       `
         {
           users {
@@ -51,7 +49,7 @@ describe('User', () => {
       },
     });
 
-    const { user } = await client.request(
+    const { user } = await server.client.request(
       `
         query user($id: ID!){
           user(id: $id) {
@@ -70,7 +68,7 @@ describe('User', () => {
   });
 
   test('Query "me" returns logged in user', async () => {
-    const { me } = await client.request(
+    const { me } = await server.client.request(
       `
         {
           me {
@@ -95,8 +93,7 @@ describe('User', () => {
 
   test('Query "me" with not logged in user', async () => {
     try {
-      await request(
-        host,
+      await server.request(
         `
           {
             me {
@@ -120,8 +117,7 @@ describe('User', () => {
   });
 
   test('Create full user with new username', async done => {
-    const { signup } = await request(
-      host,
+    const { signup } = await server.request(
       `
         mutation signup($data: UserCreateInput!) {
           signup(data: $data) {
@@ -171,8 +167,7 @@ describe('User', () => {
 
   test('Create user with existing username', async () => {
     try {
-      await request(
-        host,
+      await server.request(
         `
         mutation signup($data: UserCreateInput!) {
           signup(data: $data) {
@@ -191,8 +186,7 @@ describe('User', () => {
 
   test('Create user with existing email', async () => {
     try {
-      await request(
-        host,
+      await server.request(
         `
         mutation signup($data: UserCreateInput!) {
           signup(data: $data) {
@@ -216,8 +210,7 @@ describe('User', () => {
     await seed.user(1, { username: 'user' });
 
     try {
-      await request(
-        host,
+      await server.request(
         `
           mutation login($username: String!, $password: String!) {
             login(username: $username, password: $password) {
@@ -239,8 +232,7 @@ describe('User', () => {
     await seed.user(1, { username: 'user', active: false, validated: true });
 
     try {
-      await request(
-        host,
+      await server.request(
         `
           mutation login($username: String!, $password: String!) {
             login(username: $username, password: $password) {
@@ -259,8 +251,7 @@ describe('User', () => {
   });
 
   test('Login admin', async () => {
-    const { login } = await request(
-      host,
+    const { login } = await server.request(
       `
         mutation login($username: String!, $password: String!) {
           login(username: $username, password: $password) {
@@ -284,8 +275,7 @@ describe('User', () => {
   test('Login with validated user', async () => {
     const [user] = await seed.user(1, { username: 'user', validated: true });
 
-    const { login } = await request(
-      host,
+    const { login } = await server.request(
       `
         mutation login($username: String!, $password: String!) {
           login(username: $username, password: $password) {
@@ -309,8 +299,7 @@ describe('User', () => {
 
   test('Login with invalid password', async () => {
     try {
-      await request(
-        host,
+      await server.request(
         `
         mutation login($username: String!, $password: String!) {
           login(username: $username, password: $password) {
