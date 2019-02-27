@@ -1,0 +1,65 @@
+input GeoPointInput {
+  lat: Float!
+  lng: Float!
+}
+
+input ContactInput {
+  phone: String
+  address: String
+  email: String
+  gepoint: GeoPointInput
+}
+
+input UserCreateInput {
+  username: String!
+  password: String!
+  name: String!
+  email: String!
+  contact: ContactInput
+}
+
+input UserCreateInput {
+  username: String!
+  password: String!
+  name: String!
+  email: String!
+  contact: ContactInput
+}
+
+input UserUpdateInput {
+  username: String!
+  password: String!
+  name: String!
+  email: String!
+  contact: ContactInput
+}
+
+type User {
+  id: ID!
+  username: String!
+  name: String!
+  email: String!
+  contact: Contact
+  createdAt: Date!
+  updatedAt: Date!
+}
+
+type AuthPayload {
+  user: User!
+  token: String!
+}
+
+type Query {
+  users: [User!]!
+  user(id: ID!): User!
+  me: User!
+}
+
+type Mutation {
+  signup(data: UserCreateInput!): User!
+  updateUser(id: ID!, data: UserUpdateInput!): User!
+  deleteUser(id: ID!): User!
+
+  login(username: String!, password: String!): AuthPayload!
+  logout: Boolean!
+}

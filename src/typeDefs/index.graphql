@@ -1,1 +1,7 @@
+scalar Date
+
+# import * from "./models.graphql"
+
 # import Query.* from "./meta.graphql"
+# import Query.*, Mutation.* from "./configuration.graphql"
+# import Query.*, Mutation.* from "./user.graphql"

@@ -9,7 +9,7 @@ const get = (userId, key) =>
 
 const set = (userId, key, value) =>
   new Promise(resolve => {
-    redis.set(`configuration:${userId}:${key}`, value, () => resolve());
+    redis.set(`configuration:${userId}:${key}`, value, () => resolve(true));
   });
 
 module.exports = {

@@ -1,0 +1,32 @@
+# General
+type GeoPoint {
+  id: ID!
+  lat: Float!
+  lng: Float!
+}
+
+type Contact {
+  id: ID!
+  phone: String
+  address: String
+  email: String
+  geopoint: GeoPoint
+}
+
+type Configuration {
+  key: String!
+  value: String!
+}
+
+type User {
+  id: ID!
+  username: String!
+  password: String!
+  name: String!
+  email: String!
+  active: Boolean!
+  validated: Boolean!
+  contact: Contact
+  createdAt: Date!
+  updatedAt: Date!
+}

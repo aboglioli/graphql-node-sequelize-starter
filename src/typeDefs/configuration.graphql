@@ -1,0 +1,7 @@
+type Query {
+  getConfiguration(key: String!): String!
+}
+
+type Mutation {
+  setConfiguration(key: String!, value: String!): Boolean!
+}

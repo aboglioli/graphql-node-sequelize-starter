@@ -7,7 +7,7 @@ function getUser(token) {
 }
 
 function generateValidationCode() {
-  const possible = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789';
+  const possible = '0123456789';
 
   return '000000'
     .split('')
