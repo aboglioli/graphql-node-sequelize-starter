@@ -3,8 +3,7 @@ const path = require('path');
 const Sequelize = require('sequelize');
 const basename = path.basename(__filename);
 
-let { env, db: config } = require('../config');
-config = config[env];
+const { db: config } = require('../config');
 
 const db = {};
 

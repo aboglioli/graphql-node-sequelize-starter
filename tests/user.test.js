@@ -1,7 +1,6 @@
 const { Server, seed, getError } = require('./helpers');
 const models = require('../src/models');
 const redis = require('../src/redis');
-const { generateValidationCode } = require('../src/utils/user');
 
 describe('User', () => {
   let server;
@@ -108,12 +107,6 @@ describe('User', () => {
       expect(response.errors).toHaveLength(1);
       expect(getError(response.errors)).toBe('USER_IS_NOT_LOGGED_IN');
     }
-  });
-
-  test('Generate validation code', () => {
-    const code = generateValidationCode();
-    expect(typeof code).toBe('string');
-    expect(code).toHaveLength(6);
   });
 
   test('Create full user with new username', async done => {
