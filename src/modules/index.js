@@ -1,4 +1,8 @@
-const { mergeTypes, mergeResolvers, fileLoader } = require('merge-graphql-schemas');
+const {
+  mergeTypes,
+  mergeResolvers,
+  fileLoader,
+} = require('merge-graphql-schemas');
 const path = require('path');
 const { makeExecutableSchema } = require('graphql-tools');
 

@@ -2,6 +2,7 @@ const { GraphQLServer } = require('graphql-yoga');
 const cors = require('cors');
 
 const schema = require('./modules');
+const middlewares = require('./middlewares');
 const models = require('./models');
 const redis = require('./redis');
 const context = require('./context');
@@ -9,6 +10,7 @@ const context = require('./context');
 const server = new GraphQLServer({
   schema,
   context,
+  middlewares,
 });
 
 // cors

@@ -9,22 +9,10 @@ const { generateValidationCode } = require('../../utils/user');
 
 module.exports = {
   Query: {
-    users: resolver(models.User, {
-      before(findOptions, args, ctx) {
-        if (!ctx.user) {
-          throw new Error('USER_IS_NOT_LOGGED_IN');
-        }
-
-        return findOptions;
-      },
-    }),
+    users: resolver(models.User),
     user: resolver(models.User),
     me: resolver(models.User, {
       before(findOptions, args, ctx) {
-        if (!ctx.user) {
-          throw new Error('USER_IS_NOT_LOGGED_IN');
-        }
-
         findOptions.where = {
           id: ctx.user.id,
         };
