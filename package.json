@@ -10,7 +10,7 @@
     "playground": "graphql playground",
     "lint": "eslint --fix src/ migrations/ seeders/ tests/",
     "test": "cross-env NODE_ENV=test jest --detectOpenHandles src tests",
-    "test:watch": "cross-env NODE_ENV=test nodemon -e js,graphql -x jest --detectOpenHandles src tests",
+    "test:watch": "cross-env NODE_ENV=test jest --watch --detectOpenHandles src tests",
     "coverage": "cross-env NODE_ENV=test jest --collectCoverageFrom=src/**.js --coverage test"
   },
   "repository": {
